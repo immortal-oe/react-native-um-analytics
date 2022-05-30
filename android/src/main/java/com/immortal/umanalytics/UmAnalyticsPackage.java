@@ -1,6 +1,6 @@
 // UmAnalyticsPackage.java
 
-package com.reactlibrary;
+package com.immortal.umanalytics;
 
 import java.util.Arrays;
 import java.util.Collections;
