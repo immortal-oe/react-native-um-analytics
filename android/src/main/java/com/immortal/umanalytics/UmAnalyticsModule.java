@@ -17,7 +17,6 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableNativeMap;
 import com.facebook.react.bridge.ReadableType;
-import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -26,17 +25,16 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build.VERSION_CODES;
 import com.umeng.commonsdk.UMConfigure;
+import com.umeng.analytics.MobclickAgent;
 
 /**
- * 示例： SDK 接口桥接封装类，并未封装SDK所有API(仅封装常用API接口)，设置配置参数类API应在Android原生代码
- * 调用，例如：SDK初始化函数，Log开关函数，子进程自定义事件埋点使能函数，异常捕获功能使能/关闭函数等等。
- * 如果还需要封装其它SDK API，请参考本例自行封装
- * Created by wangfei on 17/8/28.
- * -- 适配海棠版(common 2.0.0 + analytics 8.0.0) modify by yujie on 18/12/28
+ *  最新版
  */
-
 public class UmAnalyticsModule extends ReactContextBaseJavaModule {
+
     private ReactApplicationContext context;
+    private static String _appKey = "";
+    private static String _channel = "";
 
     public UmAnalyticsModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -48,11 +46,20 @@ public class UmAnalyticsModule extends ReactContextBaseJavaModule {
         return "UmAnalyticsModule";
     }
 
+    // 预初始化
+    public static void preInit(Context context, String appKey, String channel) {
+        initRN("react-native","2.0");
+        UMConfigure.preInit(context, appKey, channel);
+        //保存起来，用于init的初始化
+         _appKey = appKey;
+         _channel = channel;
+    }
+
     @ReactMethod
-    public void init(String appkey, String channel){
-    // public void init(final int type, final String secret) {
-        initUm(appkey,channel);
-        // 选用AUTO页面采集模式
+    public void init(String appKey, String channel){
+        UMConfigure.setLogEnabled(true);
+        UMConfigure.init(context,appKey,channel,UMConfigure.DEVICE_TYPE_PHONE,null);
+          // 选用AUTO页面采集模式
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
     }
 
@@ -61,10 +68,6 @@ public class UmAnalyticsModule extends ReactContextBaseJavaModule {
         UMConfigure.setLogEnabled(logEnabled);
     }
 
-    public void initUm(String appkey, String channel){
-        initRN("react-native","2.0");
-        UMConfigure.init(context,appkey,channel,UMConfigure.DEVICE_TYPE_PHONE,"");
-    }
 
     @TargetApi(VERSION_CODES.KITKAT)
     private static void initRN(String v, String t){
