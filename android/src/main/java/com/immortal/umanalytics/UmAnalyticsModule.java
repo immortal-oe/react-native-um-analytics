@@ -85,13 +85,11 @@ public class UmAnalyticsModule extends ReactContextBaseJavaModule {
     /********************************U-App统计*********************************/
     @ReactMethod
     public void onPageStart(String pageName) {
-        //android.util.Log.e("xxxxxx","onPageStart="+mPageName);
         MobclickAgent.onPageStart(pageName);
     }
 
     @ReactMethod
     public void onPageEnd(String pageName) {
-        //android.util.Log.e("xxxxxx","onPageEnd="+mPageName);
         MobclickAgent.onPageEnd(pageName);
 
     }
@@ -100,11 +98,11 @@ public class UmAnalyticsModule extends ReactContextBaseJavaModule {
         MobclickAgent.onEvent(context, eventId);
     }
     @ReactMethod
-    public void onEventWithLable(String eventId, String eventLabel) {
+    public void onEventLabel(String eventId, String eventLabel) {
         MobclickAgent.onEvent(context, eventId, eventLabel);
     }
     @ReactMethod
-    public void onEventWithMap(String eventId, ReadableMap map) {
+    public void onEventAttributes(String eventId, ReadableMap map) {
         Map<String, String> rMap = new HashMap<String, String>();
         ReadableMapKeySetIterator iterator = map.keySetIterator();
         while (iterator.hasNextKey()) {
