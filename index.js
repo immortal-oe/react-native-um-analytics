@@ -2,6 +2,6 @@
 
 import { NativeModules } from 'react-native';
 
-const { UmAnalytic } = NativeModules;
+const { UmAnalytics } = NativeModules;
 
-export default UmAnalytic;
+export default UmAnalytics;
