@@ -1,13 +1,14 @@
 {
   "name": "react-native-um-analytics",
   "title": "React Native Um Analytics",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "TODO",
   "main": "index.js",
   "files": [
     "README.md",
     "android",
     "index.js",
+    "index.d.ts",
     "ios",
     "react-native-um-analytics.podspec"
   ],
