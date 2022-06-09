@@ -43,7 +43,7 @@ public class UmAnalyticsModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "UmAnalyticsModule";
+        return "UmAnalytics";
     }
 
     // 预初始化
