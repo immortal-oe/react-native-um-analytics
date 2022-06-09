@@ -1,4 +1,4 @@
-export default interface UmAnalytics {
+interface UMAnalytics {
   /**
    * 初始化
    */
@@ -24,3 +24,7 @@ export default interface UmAnalytics {
    */
   onEventLabel: (id: string, label: string) => void;
 }
+
+declare const UmAnalytics: UMAnalytics;
+
+export default UmAnalytics;
