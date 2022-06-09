@@ -57,7 +57,6 @@ public class UmAnalyticsModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void init(String appKey, String channel){
-        UMConfigure.setLogEnabled(true);
         UMConfigure.init(context,appKey,channel,UMConfigure.DEVICE_TYPE_PHONE,null);
           // 选用AUTO页面采集模式
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
